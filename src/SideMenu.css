@@ -1,0 +1,31 @@
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Start off-screen */
+    width: 250px;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.9); /* Transparent with some opacity */
+    transition: left 0.3s ease-in-out; /* Add sliding transition */
+    z-index: 1000; /* Ensure it's above other content */
+  }
+  
+  .side-menu.open {
+    left: 0; /* Slide in when open */
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 50px 0 0 0;
+  }
+  
+  li {
+    padding: 10px 20px;
+    cursor: pointer;
+  }
