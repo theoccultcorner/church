@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Container, Grid, Card, CardContent, Paper, List, ListItem, ListItemText } from '@mui/material';
+import { Typography, Container, Card, CardContent, Paper, List, ListItem, ListItemText } from '@mui/material';
 
 function About() {
   return (

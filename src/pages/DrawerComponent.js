@@ -34,10 +34,7 @@ const DrawerComponent = ({ open, handleDrawerClose }) => {
         <ListItem button component={Link} to="/profile" onClick={handleDrawerClose}>
           <ListItemText primary="Profile" />
         </ListItem>
-        {/* Login Link */}
-        <ListItem button component={Link} to="/login" onClick={handleDrawerClose}>
-          <ListItemText primary="Login" />
-        </ListItem>
+       
       </List>
     </Drawer>
   );
