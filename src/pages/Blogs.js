@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   messageContainer: {
     marginBottom: '10px',
     display: 'flex',
-    justifyContent: 'flex-end',
+    alignItems: 'center', // Align avatar and message vertically
   },
   messageBubble: {
     maxWidth: '70%',
@@ -78,7 +78,8 @@ const Blogs = () => {
           id: doc.id,
           message: messageData.message,
           sender: messageData.sender,
-          avatar: messageData.avatar
+          avatar: messageData.avatar,
+          displayName: messageData.displayName // Add displayName to message object
         };
         messageList.push(messageWithAvatar);
       });
@@ -90,8 +91,8 @@ const Blogs = () => {
 
   const sendMessage = async () => {
     try {
-      // Include user's avatar URL when sending message
-      const newMessageRef = await addDoc(collection(db, 'messages'), { message, avatar: user.photoURL, timestamp: new Date(), sender: user.uid });
+      // Include user's avatar URL and display name when sending message
+      const newMessageRef = await addDoc(collection(db, 'messages'), { message, avatar: user.photoURL, displayName: user.displayName, timestamp: new Date(), sender: user.uid });
       console.log('Message sent with ID: ', newMessageRef.id);
       setMessage('');
       fetchMessages(); // Re-fetch messages after sending a new message
@@ -125,7 +126,7 @@ const Blogs = () => {
           <div key={message.id} className={classes.messageContainer}>
             <Avatar alt="User Avatar" src={message.avatar} />
             <div className={classes.messageBubble}>
-              <Typography>{message.message}</Typography>
+              <Typography><strong>{message.displayName}: </strong>{message.message}</Typography>
             </div>
             <Button variant="contained" color="secondary" onClick={() => deleteMessage(message.id)}>
               Del
