@@ -110,9 +110,13 @@ const Messenger = () => {
 
   const deleteMessage = async (id) => {
     try {
-      await deleteDoc(doc(db, 'messages', id));
-      console.log('Message deleted successfully');
-      fetchMessages(); // Re-fetch messages after deleting a message
+      const messageToDelete = messages.find((msg) => msg.id === id);
+      // Check if the message belongs to the authenticated user
+      if (messageToDelete && messageToDelete.sender === user.uid) {
+        await deleteDoc(doc(db, 'messages', id));
+        console.log('Message deleted successfully');
+        fetchMessages(); // Re-fetch messages after deleting a message
+      }
     } catch (error) {
       console.error('Error deleting message:', error);
     }
@@ -128,9 +132,11 @@ const Messenger = () => {
             <div className={classes.messageBubble}>
               <Typography><strong>{message.displayName}: </strong>{message.message}</Typography>
             </div>
-            <Button variant="contained" color="secondary" onClick={() => deleteMessage(message.id)}>
-              Del
-            </Button>
+            {user && user.uid === message.sender && ( // Show delete button only for user's own messages
+              <Button variant="contained" color="secondary" onClick={() => deleteMessage(message.id)}>
+                Del
+              </Button>
+            )}
           </div>
         ))}
       </div>
