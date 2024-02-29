@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Button, TextField, Typography, Box, Avatar, makeStyles } from '@material-ui/core';
-import { auth, db } from './firebaseConfig'; // Import auth object from firebaseConfig
+import { auth, db } from './firebaseConfig';
 import { collection, addDoc, getDocs, deleteDoc, doc, orderBy, query } from "firebase/firestore";
 
 const useStyles = makeStyles((theme) => ({
@@ -53,6 +53,12 @@ const Blogs = () => {
       fetchMessages(); // Fetch messages only if user is authenticated
     }
   }, [user]); // Re-fetch messages when the user changes
+
+  useEffect(() => {
+    const intervalId = setInterval(fetchMessages, 1000); // Fetch messages every second
+
+    return () => clearInterval(intervalId); // Clean up the interval on unmount
+  }, []); // Run only once on component mount
 
   useEffect(() => {
     // Scroll chat container to the bottom when messages change
@@ -113,7 +119,7 @@ const Blogs = () => {
 
   return (
     <Box>
-      <Typography variant="h4">Chat Room</Typography>
+      <Typography variant="h4">Messenger</Typography>
       <div ref={chatContainerRef} className={classes.chatContainer}>
         {messages.map((message, index) => (
           <div key={message.id} className={classes.messageContainer}>
