@@ -128,7 +128,7 @@ const Blogs = () => {
               <Typography>{message.message}</Typography>
             </div>
             <Button variant="contained" color="secondary" onClick={() => deleteMessage(message.id)}>
-              Delete
+              Del
             </Button>
           </div>
         ))}
