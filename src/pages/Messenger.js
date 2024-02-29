@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Blogs = () => {
+const Messenger = () => {
   const classes = useStyles();
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState('');
@@ -153,4 +153,4 @@ const Blogs = () => {
   );
 };
 
-export default Blogs;
+export default Messenger;

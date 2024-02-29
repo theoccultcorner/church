@@ -24,8 +24,8 @@ const DrawerComponent = ({ open, handleDrawerClose }) => {
         <ListItem button component={Link} to="/sermons" onClick={handleDrawerClose}>
           <ListItemText primary="Sermons" />
         </ListItem>
-        <ListItem button component={Link} to="/blogs" onClick={handleDrawerClose}>
-          <ListItemText primary="Blogs" />
+        <ListItem button component={Link} to="/messenger" onClick={handleDrawerClose}>
+          <ListItemText primary="Messenger" />
         </ListItem>
         <ListItem button component={Link} to="/contact" onClick={handleDrawerClose}>
           <ListItemText primary="Contact" />

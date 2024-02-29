@@ -3,7 +3,7 @@ import { Button, Avatar, Typography, TextField, Box } from '@material-ui/core';
 import { auth, db } from './firebaseConfig'; // Import auth and db from firebaseConfig.js
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import { doc, setDoc, getDoc } from "firebase/firestore";
-import Blogs from './Blogs';
+ 
 
 const Home = () => {
   const [user, setUser] = useState(null);
@@ -142,7 +142,7 @@ const Home = () => {
           <Button variant="contained" color="secondary" onClick={handleSignOut}>
             Sign Out
           </Button>
-          <Blogs />
+           
           <div style={{ display: 'none' }}>
             <Typography>This component is hidden until logged in.</Typography>
           </div>

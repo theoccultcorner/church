@@ -1,9 +1,9 @@
 import React from 'react';
 import { Typography, Container, List, ListItem, ListItemText } from '@mui/material';
 
-function AboutUs() {
+function About() {
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="md" sx={{ paddingTop: '4rem' }}> {/* Add padding at the top */}
       <Typography variant="h2" gutterBottom>About Us</Typography>
       <Typography variant="body1" paragraph>Welcome to the Gnostic Christian Church!</Typography>
       <Typography variant="body1" paragraph>
@@ -43,4 +43,4 @@ function AboutUs() {
   );
 }
 
-export default AboutUs;
+export default About;

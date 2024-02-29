@@ -35,10 +35,11 @@ const Layout = () => {
   return (
     <div className={classes.root}>
       <div className={classes.content}>
-        <Outlet />
+      <Outlet />
       </div>
       <AppBarComponent handleDrawerOpen={handleDrawerOpen} />
       <DrawerComponent open={open} handleDrawerClose={handleDrawerClose} />
+       
     </div>
   );
 };
