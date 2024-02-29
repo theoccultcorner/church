@@ -147,7 +147,7 @@ const Blogs = () => {
         <Button variant="contained" color="primary" onClick={sendMessage}>
           Send
         </Button>
-      </div>
+       </div>
     </Box>
   );
 };
