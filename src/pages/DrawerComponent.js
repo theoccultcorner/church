@@ -11,7 +11,9 @@ const DrawerComponent = ({ open, handleDrawerClose }) => {
       onClose={handleDrawerClose}
     >
       <List>
-        
+      <ListItem button component={Link} to="/registrationandlogin" onClick={handleDrawerClose}>
+          <ListItemText primary="RegistrtionAndLogin" />
+        </ListItem>
         <ListItem button component={Link} to="/" onClick={handleDrawerClose}>
           <ListItemText primary="Home" />
         </ListItem>
@@ -30,11 +32,13 @@ const DrawerComponent = ({ open, handleDrawerClose }) => {
         <ListItem button component={Link} to="/contact" onClick={handleDrawerClose}>
           <ListItemText primary="Contact" />
         </ListItem>
-        {/* Profile Link */}
+        
         <ListItem button component={Link} to="/profile" onClick={handleDrawerClose}>
           <ListItemText primary="Profile" />
         </ListItem>
-       
+        <ListItem button component={Link} to="/wallet" onClick={handleDrawerClose}>
+          <ListItemText primary="Wallet" />
+        </ListItem>
       </List>
     </Drawer>
   );

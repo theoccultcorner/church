@@ -1,73 +1,69 @@
 import React, { useState } from 'react';
-import { TextField, Button, Container, Typography, List, ListItem, ListItemText, makeStyles } from '@material-ui/core';
-
-const useStyles = makeStyles((theme) => ({
-  container: {
-    maxWidth: '600px',
-    margin: 'auto',
-    marginTop: '20px',
-    border: '1px solid #ddd',
-    borderRadius: '5px',
-    padding: '20px',
-    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
-    background: '#fff',
-  },
-  listItem: {
-    background: '#f5f5f5',
-    borderRadius: '5px',
-    marginBottom: '10px',
-    padding: '10px',
-    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
-  },
-  inputField: {
-    marginTop: '20px',
-  },
-}));
+import { TextField, Button, Container, Typography } from '@mui/material';
+import { Block, Blockchain } from './Blockchain'; // Import Block and Blockchain classes
 
 const Contact = () => {
-  const classes = useStyles();
-  const [messages, setMessages] = useState([]);
-  const [inputMessage, setInputMessage] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleChange = (e) => {
-    setInputMessage(e.target.value);
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (inputMessage.trim() !== '') {
-      const newMessage = {
-        id: new Date().getTime(), // Generate a unique ID for each message
-        text: inputMessage
-      };
-      setMessages([...messages, newMessage]);
-      setInputMessage('');
-    }
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault(); // Prevent default form submission behavior
+
+    // Create a new block with the user data
+    const newBlock = new Block(
+      0, // Index
+      new Date().toISOString(), // Timestamp
+      { username, password }, // Data
+      '0' // Previous hash (for the genesis block)
+    );
+
+    // Create a new blockchain instance
+    const blockchain = new Blockchain();
+
+    // Add the new block to the blockchain
+    blockchain.addBlock(newBlock);
+
+    // Provide feedback to the user
+    alert('Registration successful!');
+
+    // Clear the input fields
+    setUsername('');
+    setPassword('');
   };
 
   return (
-    <Container className={classes.container}>
-      <Typography variant="h4" gutterBottom>Messenger</Typography>
-      <List>
-        {messages.map((message) => (
-          <ListItem key={message.id} className={classes.listItem}>
-            <ListItemText>{message.text}</ListItemText>
-          </ListItem>
-        ))}
-      </List>
-      <form onSubmit={handleSubmit}>
+    <Container maxWidth="sm">
+      <Typography variant="h4" component="h1" align="center" gutterBottom>
+        User Registration
+      </Typography>
+      <form onSubmit={handleFormSubmit}>
         <TextField
-          className={classes.inputField}
-          fullWidth
+          label="Username"
           variant="outlined"
-          label="Type a message..."
-          value={inputMessage}
-          onChange={handleChange}
-          multiline
-          rows={2}
+          fullWidth
+          value={username}
+          onChange={handleUsernameChange}
+          margin="normal"
+        />
+        <TextField
+          label="Password"
+          variant="outlined"
+          fullWidth
+          type="password"
+          value={password}
+          onChange={handlePasswordChange}
+          margin="normal"
         />
         <Button variant="contained" color="primary" type="submit">
-          Send
+          Register
         </Button>
       </form>
     </Container>

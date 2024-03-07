@@ -8,10 +8,11 @@ import Sermons from "./pages/Sermons";
 import Messenger from "./pages/Messenger";
 import Contact from "./pages/Contact";
 import Profile from "./pages/Profile";
-
+import Wallet from "./pages/Wallet"
 
 // Import DrawerComponent
 import DrawerComponent from "./pages/DrawerComponent";
+import RegistrationAndLogin from "./pages/RegistrationAndLogin";
 
 export default function App() {
   return (
@@ -29,7 +30,8 @@ export default function App() {
             <Route path="messenger" element={<Messenger />} />
             <Route path="contact" element={<Contact />} />
             <Route path="profile" element={<Profile />} />
- 
+            <Route path="Wallet" element={<Wallet />} />
+            <Route path="registrationandlogin" element={<RegistrationAndLogin />} />
              
           </Route>
         </Routes>
