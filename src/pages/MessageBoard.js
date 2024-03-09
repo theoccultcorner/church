@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Button, Container, Typography, List, ListItem } from '@mui/material';
-import { Block } from './Blockchain'; // Import the Block class from the Blockchain module
+ // Import the Block class from the Blockchain module
 
 const MessageBoard = ({ blockchain }) => {
   const [messages, setMessages] = useState([]);

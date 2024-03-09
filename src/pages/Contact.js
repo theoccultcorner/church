@@ -1,69 +1,63 @@
 import React, { useState } from 'react';
 import { TextField, Button, Container, Typography } from '@mui/material';
-import { Block, Blockchain } from './Blockchain'; // Import Block and Blockchain classes
 
 const Contact = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const handleFormSubmit = (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
+    // Here you can handle form submission, like sending the data to a server
+    console.log(formData);
 
-    // Create a new block with the user data
-    const newBlock = new Block(
-      0, // Index
-      new Date().toISOString(), // Timestamp
-      { username, password }, // Data
-      '0' // Previous hash (for the genesis block)
-    );
-
-    // Create a new blockchain instance
-    const blockchain = new Blockchain();
-
-    // Add the new block to the blockchain
-    blockchain.addBlock(newBlock);
-
-    // Provide feedback to the user
-    alert('Registration successful!');
-
-    // Clear the input fields
-    setUsername('');
-    setPassword('');
+    // Clear the form after submission
+    setFormData({ name: '', email: '', message: '' });
   };
 
   return (
     <Container maxWidth="sm">
-      <Typography variant="h4" component="h1" align="center" gutterBottom>
-        User Registration
-      </Typography>
-      <form onSubmit={handleFormSubmit}>
+      <Typography variant="h4" align="center" gutterBottom>Contact Us</Typography>
+      <form onSubmit={handleSubmit}>
         <TextField
-          label="Username"
-          variant="outlined"
           fullWidth
-          value={username}
-          onChange={handleUsernameChange}
+          label="Name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
           margin="normal"
+          required
         />
         <TextField
-          label="Password"
-          variant="outlined"
           fullWidth
-          type="password"
-          value={password}
-          onChange={handlePasswordChange}
+          type="email"
+          label="Email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
           margin="normal"
+          required
         />
-        <Button variant="contained" color="primary" type="submit">
-          Register
+        <TextField
+          fullWidth
+          label="Message"
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          margin="normal"
+          multiline
+          rows={4}
+          required
+        />
+        <Button type="submit" variant="contained" color="primary" size="large" fullWidth>
+          Send Message
         </Button>
       </form>
     </Container>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import { BlockchainProvider } from './BlockchainContext';
-import RegisterAndLogin from './RegisterAndLogin';
+ 
 import SideMenu from './SideMenu';
 import Main from './Main';
 import { AppBar, Toolbar, Typography, IconButton } from '@mui/material';
@@ -29,7 +29,7 @@ function App() {
               <MenuIcon />
             </IconButton>
             <BlockchainProvider>
-      <RegisterAndLogin />
+      
     </BlockchainProvider>
             <Chat />
             <Main />

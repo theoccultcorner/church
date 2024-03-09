@@ -1,22 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Button, Grid } from '@material-ui/core';
+import { Typography, Button } from '@material-ui/core';
+ 
+import 'slick-carousel/slick/slick.css'; // Import slick carousel styles
+import 'slick-carousel/slick/slick-theme.css'; // Import slick carousel theme styles
+import { Facebook, Instagram, YouTube } from '@material-ui/icons'; // Import icons
 import backgroundImage from './background.jpg'; // Import your background image
-import image1 from './background.jpg'; // Import your gallery images
-import image2 from './background.jpg';
-import image3 from './background.jpg';
+ 
 // Import additional images as needed
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     textAlign: 'center',
-    paddingTop: theme.spacing(4),
     position: 'relative',
     overflow: 'hidden',
-    backgroundImage: `url(${backgroundImage})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
+    height: '100vh', // Make the root element full-screen
+    backgroundImage: `url(${backgroundImage})`, // Set the background image
+    backgroundSize: 'cover', // Cover the entire background
+    backgroundPosition: 'center', // Center the background image
+    transition: 'background-color 0.3s ease', // Smooth transition for background color change
   },
   overlay: {
     position: 'absolute',
@@ -30,6 +33,8 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     zIndex: 1,
     color: '#fff', // Text color on top of the overlay
+    paddingTop: theme.spacing(12), // Adjust top padding to accommodate the parallax effect
+    paddingBottom: theme.spacing(12), // Adjust bottom padding to accommodate the parallax effect
   },
   title: {
     marginBottom: theme.spacing(4),
@@ -37,20 +42,49 @@ const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(2),
   },
-  galleryItem: {
-    padding: theme.spacing(2),
+  sliderContainer: {
+    width: '80%', // Set the width of the carousel container
+    margin: '0 auto', // Center the carousel container
   },
   galleryImage: {
-    width: '100%',
-    height: 'auto',
+    width: '100%', // Set the width of the carousel images
+    maxHeight: '70vh', // Limit the height of the carousel images
+    objectFit: 'cover', // Cover the entire image within its container
+    borderRadius: theme.spacing(1), // Add some border radius for better aesthetics
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Add a subtle shadow for depth
+  },
+  socialMediaContainer: {
+    marginTop: theme.spacing(4), // Add some space between the carousel and social media icons
+  },
+  socialMediaIcon: {
+    fontSize: '2rem', // Set the size of the social media icons
+    margin: theme.spacing(1), // Add some margin around the icons
+    color: '#fff', // Set the color of the icons to white
   },
 }));
 
 const Home = () => {
   const classes = useStyles();
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const position = window.scrollY;
+      setScrollPosition(position);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // Change background color based on scroll position
+  const backgroundColor = scrollPosition > 100 ? '#333' : 'transparent';
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} style={{ backgroundColor }}>
       <div className={classes.overlay}></div> {/* Overlay for better readability */}
       <div className={classes.content}>
         <Typography variant="h3" className={classes.title}>
@@ -70,19 +104,11 @@ const Home = () => {
         <Button variant="outlined" color="primary" className={classes.button}>
           Learn More
         </Button>
-        {/* Photo Gallery */}
-        <Grid container spacing={3} justify="center">
-          <Grid item xs={12} sm={4} className={classes.galleryItem}>
-            <img src={image1} alt="Gallery Item 1" className={classes.galleryImage} />
-          </Grid>
-          <Grid item xs={12} sm={4} className={classes.galleryItem}>
-            <img src={image2} alt="Gallery Item 2" className={classes.galleryImage} />
-          </Grid>
-          <Grid item xs={12} sm={4} className={classes.galleryItem}>
-            <img src={image3} alt="Gallery Item 3" className={classes.galleryImage} />
-          </Grid>
-          {/* Add more Grid items for additional gallery images */}
-        </Grid>
+        <div className={classes.socialMediaContainer}>
+          <Facebook className={classes.socialMediaIcon} />
+          <Instagram className={classes.socialMediaIcon} />
+          <YouTube className={classes.socialMediaIcon} />
+        </div>
       </div>
     </div>
   );
